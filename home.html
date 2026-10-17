@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Adlinox - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Source Sans Pro', 'Trebuchet MS', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #E3E3E3;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ===== ВЕРХНЯЯ ПАНЕЛЬ ===== */
+        .topbar {
+            background-color: #1D59AC;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* --- ПЕРВЫЙ РЯД (Меню, Лого, Ссылки) --- */
+        .top-row {
+            display: flex;
+            align-items: center;
+            padding: 8px 10px;
+            gap: 10px;
+            flex-wrap: wrap; 
+        }
+
+        .menu-btn {
+            font-size: 22px;
+            cursor: pointer;
+            color: #fff;
+            user-select: none;
+        }
+
+        .logo {
+            height: 26px;
+        }
+        
+        .logo img {
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            flex-wrap: wrap;
+        }
+
+        .nav-links span {
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .nav-links span:hover { opacity: 0.8; }
+
+        /* --- ВТОРОЙ РЯД (Поиск и Иконки) --- */
+        .bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px 8px 10px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Поиск */
+        .search-box {
+            flex: 1;
+            min-width: 140px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            background-color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 30px 6px 10px;
+            color: #333;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            color: #888;
+            pointer-events: none;
+        }
+
+        /* Иконки справа */
+        .right-icons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .icon-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .settings-icon {
+            font-size: 20px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* ===== ВЫДВИЖНОЕ МЕНЮ ===== */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -260px;
+            width: 260px;
+            height: 100vh;
+            background-color: #FFFFFF;
+            z-index: 1001;
+            transition: left 0.3s ease;
+            padding-top: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .side-menu.open { left: 0; }
+
+        .side-menu .menu-item {
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #555;
+            cursor: pointer;
+        }
+
+        .side-menu .menu-item.active {
+            color: #E2242A;
+            background-color: #F2F2F2;
+            border-left: 4px solid #E2242A;
+        }
+
+        /* Затемнение фона */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+            z-index: 1000;
+            display: none;
+        }
+        .overlay.open { display: block; }
+
+        /* ===== ОСНОВНОЙ БЛОК ===== */
+        .main-wrapper {
+            margin-top: 120px; 
+            padding: 15px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        .welcome-banner {
+            background-color: #F7941D;
+            color: #fff;
+            text-align: center;
+            padding: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .game-card {
+            background-color: #FFFFFF;
+            border: 1px solid #CCC;
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .game-card:hover { transform: scale(1.02); }
+
+        .game-card .thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #E3E3E3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .game-card .info { padding: 10px; }
+        .game-card .info .name {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .game-card .info .stats {
+            font-size: 12px;
+            color: #888;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+    <div class="topbar" id="topbar">
+        <!-- Первый ряд: Меню, Лого, Ссылки -->
+        <div class="top-row">
+            <div class="menu-btn" onclick="toggleMenu()">☰</div>
+            <div class="logo">
+                <img src="https://i.postimg.cc/mZCM5CRw/1792267230266.png" alt="Adlinox" />
+            </div>
+            <div class="nav-links">
+                <span>Games</span>
+                <span>Catalog</span>
+                <span>Create</span>
+                <span>Download</span>
+            </div>
+        </div>
+
+        <!-- Второй ряд: Поиск и Иконки -->
+        <div class="bottom-row">
+            <div class="search-box">
+                <input type="text" placeholder="Search" />
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+            </div>
+            
+            <div class="right-icons">
+                <div class="icon-item" title="Robux">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8M8 12h8"></path></svg>
+                    <span>187</span>
+                </div>
+                <div class="icon-item" title="Tix">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z"></path><path d="M3 10h18"></path></svg>
+                    <span>0</span>
+                </div>
+                <div class="settings-icon" title="Settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ВЫДВИЖНОЕ МЕНЮ -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-item active">Home</div>
+        <div class="menu-item">Profile</div>
+        <div class="menu-item">Messages</div>
+        <div class="menu-item">Friends</div>
+        <div style="height:1px; background:#EEE; margin:8px 0;"></div>
+        <div class="menu-item">Avatar</div>
+        <div class="menu-item">Inventory</div>
+        <div class="menu-item">Trade</div>
+        <div class="menu-item">Groups</div>
+        <div style="height:1px; background:#EEE; margin:8px 0;"></div>
+        <div class="menu-item">Donate</div>
+    </div>
+
+    <!-- Затемнение фона -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- ОСНОВНОЙ БЛОК -->
+    <div class="main-wrapper" id="main-wrapper">
+        <div class="welcome-banner">
+            Welcome to Adlinox: Reborn! Click here to join our Discord server.
+        </div>
+
+        <div class="section-title">Continue Playing</div>
+        <div class="game-grid">
+            <div class="game-card">
+                <div class="thumbnail">GAME IMAGE</div>
+                <div class="info">
+                    <div class="name">Blox Fruits</div>
+                    <div class="stats">500K Playing</div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="thumbnail">GAME IMAGE</div>
+                <div class="info">
+                    <div class="name">Brookhaven RP</div>
+                    <div class="stats">800K Playing</div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="thumbnail">GAME IMAGE</div>
+                <div class="info">
+                    <div class="name">Adopt Me!</div>
+                    <div class="stats">1.2M Playing</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">Recently Played</div>
+        <div class="game-grid">
+            <div class="game-card">
+                <div class="thumbnail">GAME IMAGE</div>
+                <div class="info">
+                    <div class="name">Tower of Hell</div>
+                    <div class="stats">200K Playing</div>
+                </div>
+            </div>
+            <div class="game-card">
+                <div class="thumbnail">GAME IMAGE</div>
+                <div class="info">
+                    <div class="name">Murder Mystery 2</div>
+                    <div class="stats">150K Playing</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- СКРИПТ ДЛЯ МЕНЮ И АДАПТАЦИИ -->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("sideMenu");
+            var overlay = document.getElementById("overlay");
+            menu.classList.toggle("open");
+            overlay.classList.toggle("open");
+        }
+
+        // Автоматический расчет отступа, чтобы панель не перекрывала контент
+        function adjustMargin() {
+            var topbar = document.getElementById("topbar");
+            if(topbar) {
+                var topbarHeight = topbar.offsetHeight;
+                document.getElementById("main-wrapper").style.marginTop = (topbarHeight + 15) + "px";
+                document.getElementById("sideMenu").style.top = topbarHeight + "px";
+                document.getElementById("overlay").style.top = topbarHeight + "px";
+                document.getElementById("sideMenu").style.height = "calc(100vh - " + topbarHeight + "px)";
+            }
+        }
+
+        // Вызываем при загрузке и изменении окна
+        window.onload = adjustMargin;
+        window.onresize = adjustMargin;
+    </script>
+</body>
+</html>
