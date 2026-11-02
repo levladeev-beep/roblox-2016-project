@@ -16,12 +16,10 @@
         .logo { height: 26px; }
         .logo img { height: 100%; object-fit: contain; }
         
-        /* Ссылки */
         .nav-links { display: flex; gap: 15px; font-size: 15px; font-weight: 700; color: #fff; flex-wrap: wrap; align-items: center; }
         .nav-links span { cursor: pointer; white-space: nowrap; }
         .nav-links span:hover { opacity: 0.8; }
 
-        /* --- ВТОРОЙ РЯД (Поиск и Иконки) --- */
         .bottom-row { display: flex; align-items: center; justify-content: space-between; padding: 0 10px 8px 10px; gap: 15px; flex-wrap: wrap; }
         .search-box { flex: 1; min-width: 150px; position: relative; }
         .search-box input { width: 100%; background-color: #fff; border: none; border-radius: 4px; padding: 6px 30px 6px 10px; color: #333; font-size: 14px; outline: none; }
@@ -31,50 +29,72 @@
         .icon-item { display: flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 700; color: #fff; cursor: pointer; white-space: nowrap; }
         .settings-icon { font-size: 20px; color: #fff; cursor: pointer; }
 
-        /* ===== МЕНЮ ===== */
-        .side-menu { position: fixed; top: 0; left: -260px; width: 260px; height: 100vh; background-color: #FFFFFF; z-index: 1001; transition: left 0.3s ease; padding-top: 20px; box-shadow: 2px 0 5px rgba(0,0,0,0.1); }
+        /* ===== БОКОВОЕ МЕНЮ ===== */
+        .side-menu { 
+            position: fixed; 
+            top: 0; 
+            left: -260px; 
+            width: 260px; 
+            height: 100vh; 
+            background-color: #FFFFFF; 
+            z-index: 1001; 
+            transition: left 0.3s ease; 
+            display: flex; 
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1); 
+        }
         .side-menu.open { left: 0; }
+        
+        .menu-items-container {
+            flex: 1;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+
         .side-menu .menu-item { padding: 14px 20px; font-size: 16px; font-weight: 600; color: #555; cursor: pointer; }
         .side-menu .menu-item.active { color: #E2242A; background-color: #F2F2F2; border-left: 4px solid #E2242A; }
+        
+        /* Контейнер для кнопки выхода внизу меню */
+        .menu-bottom {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        /* КНОПКА ВЫХОДА */
+        .logout-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #E2242A;
+            color: #fff;
+            text-align: center;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        .logout-btn:hover {
+            background-color: #c01c22;
+        }
+
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(0,0,0,0.4); z-index: 1000; display: none; }
         .overlay.open { display: block; }
 
         /* ===== ОСНОВНОЙ БЛОК ===== */
         .main-wrapper { margin-top: 120px; padding: 15px; max-width: 1000px; margin-left: auto; margin-right: auto; width: 100%; }
         
-        /* Профиль пользователя (ТОЛЬКО НИК) */
-        .user-profile {
-            margin-bottom: 20px;
-        }
-        .user-profile .username {
-            font-size: 32px;
-            font-weight: 900;
-            color: #1D59AC;
-            word-break: break-all;
-        }
+        .user-profile { margin-bottom: 20px; }
+        .user-profile .username { font-size: 32px; font-weight: 900; color: #1D59AC; word-break: break-all; }
 
-        /* Оранжевый баннер */
         .welcome-banner { background-color: #F7941D; color: #fff; text-align: center; padding: 15px; font-weight: 700; font-size: 18px; margin-bottom: 25px; border-radius: 6px; }
 
-        /* Блок "В разработке" */
-        .dev-block {
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 50px 20px;
-            text-align: center;
-            color: #666;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
+        .dev-block { background-color: #fff; border: 1px solid #ccc; border-radius: 8px; padding: 50px 20px; text-align: center; color: #666; font-size: 20px; font-weight: 600; margin-bottom: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
 
         .copyrightFooter { color: #888; width: 100%; bottom: 0; padding: 5px 0; z-index: 50; position: fixed; font-size: 10px; background: rgba(255,255,255,0.8); text-align: center; pointer-events: none; }
 
-        /* =======================================================
-           АДАПТИВНОСТЬ
-           ======================================================= */
         @media (max-width: 768px) {
             .main-wrapper { margin-top: 130px; padding: 10px; }
             .user-profile .username { font-size: 26px; }
@@ -122,34 +142,39 @@
 
     <!-- МЕНЮ -->
     <div class="side-menu" id="sideMenu">
-        <div class="menu-item active">Home</div>
-        <div class="menu-item">Profile</div>
-        <div class="menu-item">Messages</div>
-        <div class="menu-item">Friends</div>
-        <div style="height:1px; background:#EEE; margin:8px 0;"></div>
-        <div class="menu-item">Avatar</div>
-        <div class="menu-item">Inventory</div>
-        <div class="menu-item">Trade</div>
-        <div class="menu-item">Groups</div>
-        <div style="height:1px; background:#EEE; margin:8px 0;"></div>
-        <div class="menu-item">Donate</div>
+        <div class="menu-items-container">
+            <div class="menu-item active">Home</div>
+            <div class="menu-item">Profile</div>
+            <div class="menu-item">Messages</div>
+            <div class="menu-item">Friends</div>
+            <div style="height:1px; background:#EEE; margin:8px 0;"></div>
+            <div class="menu-item">Avatar</div>
+            <div class="menu-item">Inventory</div>
+            <div class="menu-item">Trade</div>
+            <div class="menu-item">Groups</div>
+            <div style="height:1px; background:#EEE; margin:8px 0;"></div>
+            <div class="menu-item">Donate</div>
+        </div>
+        
+        <!-- КНОПКА ВЫХОДА -->
+        <div class="menu-bottom">
+            <button class="logout-btn" onclick="logout()">Log out</button>
+        </div>
     </div>
+    
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <!-- ОСНОВНОЙ БЛОК -->
     <div class="main-wrapper" id="main-wrapper">
         
-        <!-- ПРОФИЛЬ (ТОЛЬКО НИК) -->
         <div class="user-profile">
             <div class="username" id="userName">Guest</div>
         </div>
 
-        <!-- БАННЕР -->
         <div class="welcome-banner">
             Welcome to Adlinox!
         </div>
 
-        <!-- ИГРЫ В РАЗРАБОТКЕ -->
         <div class="dev-block">
             Games are currently in development
         </div>
@@ -159,13 +184,17 @@
 
     <!-- СКРИПТ -->
     <script>
-        // Берем ник из памяти браузера (который ввели при регистрации)
         const savedUsername = localStorage.getItem('adlinox_username');
         
-        if (savedUsername) {
-            document.getElementById('userName').innerText = savedUsername;
+        if (!savedUsername) {
+            window.location.href = 'index.html';
         } else {
-            document.getElementById('userName').innerText = "Guest"; // Если зашли без регистрации
+            document.getElementById('userName').innerText = savedUsername;
+        }
+
+        function logout() {
+            localStorage.removeItem('adlinox_username');
+            window.location.href = 'index.html';
         }
 
         function toggleMenu() {
