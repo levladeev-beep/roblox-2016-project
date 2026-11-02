@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Adlinox - Create Account</title>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet" />
     <style>
         .page {
             gap: 56px;
@@ -65,7 +67,6 @@
             text-transform: uppercase;
         }
         
-        /* Кнопка Discord */
         .discord-submit {
             display: flex;
             align-items: center;
@@ -85,10 +86,19 @@
             box-sizing: border-box;
             margin-bottom: 15px;
         }
-        .discord-submit:hover { background-color: #4752C4; }
-        .discord-submit.verified { background-color: #248046; pointer-events: none; }
-        .discord-submit svg { width: 20px; height: 20px; margin-right: 8px; fill: currentColor; }
-
+        .discord-submit:hover {
+            background-color: #4752C4;
+        }
+        .discord-submit.verified {
+            background-color: #248046;
+            pointer-events: none;
+        }
+        .discord-submit svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            fill: currentColor;
+        }
         .form-divider {
             display: flex;
             align-items: center;
@@ -124,7 +134,13 @@
         }
         .input::placeholder { color: #999; }
         .input:focus { border-color: #E2242A; }
-        .input:disabled { background: #f5f5f5; color: #aaa; border-color: #e0e0e0; cursor: not-allowed; }
+        
+        .input:disabled, .submit:disabled {
+            background: #f5f5f5;
+            color: #aaa;
+            border-color: #e0e0e0;
+            cursor: not-allowed;
+        }
 
         .submit {
             color: #FFFFFF;
@@ -142,7 +158,6 @@
             text-transform: uppercase;
         }
         .submit:hover:not(:disabled) { background: #c01c22; }
-        .submit:disabled { background: #aaa; cursor: not-allowed; }
         
         .links {
             gap: 8px;
@@ -164,11 +179,13 @@
             background: none;
             font-weight: 600;
         }
+        .links button:hover { text-decoration: underline; }
         .links a {
             color: #E2242A;
             font-weight: 600;
             text-decoration: none;
         }
+        .links a:hover { text-decoration: underline !important; }
         
         .copyrightFooter {
             color: #888;
@@ -191,28 +208,29 @@
                 <h2 class="heading">Create Account</h2>
                 
                 <form id="registerForm">
-                    <!-- Кнопка верификации -->
-                    <a id="discordBtn" href="https://adlinox-server.onrender.com/login" class="discord-submit">
-                        <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-11,68.55,68.55,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.65-2.1a75.22,75.22,0,0,0,92.74,0c.84,1,1.74,1.43,2.65,2.1a68.55,68.55,0,0,1-10.64,5.12,74.37,74.37,0,0,0,6.72,11,105.73,105.73,0,0,0,31.05-18.83C129.87,49.86,123.86,27,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.92,46,53.7,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.16,46,95.94,53,91,65.69,84.69,65.69Z"/></svg>
+                    <!-- Ссылка авторизации Discord -->
+                    <a id="discordBtn" href="https://discord.com" class="discord-submit">
+                        <svg viewBox="0 0 127.14 96.36" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-11,68.55,68.55,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.65-2.1a75.22,75.22,0,0,0,92.74,0c.84,1,1.74,1.43,2.65,2.1a68.55,68.55,0,0,1-10.64,5.12,74.37,74.37,0,0,0,6.72,11,105.73,105.73,0,0,0,31.05-18.83C129.87,49.86,123.86,27,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.92,46,53.7,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.16,46,95.94,53,91,65.69,84.69,65.69Z"/>
+                        </svg>
                         <span id="discordText">Verify with Discord</span>
                     </a>
 
                     <div class="form-divider">then fill the form</div>
 
-                    <!-- Поля для ввода -->
-                    <input class="input" id="username" placeholder="Username" disabled required />
-                    <input class="input" id="password" placeholder="Password" type="password" disabled required />
-                    <input class="input" id="confirm" placeholder="Confirm Password" type="password" disabled required />
-                    <button class="submit" id="submitBtn" type="submit" disabled>Create Account</button>
+                    <!-- Поля формы -->
+                    <input class="input" placeholder="Username" type="text" id="username" disabled required />
+                    <input class="input" placeholder="Password" type="password" id="password" disabled required />
+                    <input class="input" placeholder="Confirm Password" type="password" id="confirmPassword" disabled required />
+                    <button class="submit" type="submit" id="submitBtn" disabled>Create Account</button>
                 </form>
-                
                 <div class="links">
                     <span>Already have an account? <button type="button">Log in</button></span>
                     <a href="#">Forgot password?</a>
                 </div>
             </div>
             
-            <!-- Логотип -->
+            <!-- ИСПРАВЛЕННЫЙ ЛОГОТИП -->
             <img class="brandArt" src="https://i.postimg.cc/mZCM5CRw/1792267230266.png" alt="Adlinox" />
             
             <div class="copyrightFooter">© 2026 Adlinox. All rights reserved.</div>
@@ -220,65 +238,49 @@
     </div>
 
     <script>
-        // 1. Проверка возврата после Discord
         window.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
-            
-            if (params.get('success') === 'true') {
+            const discordCode = params.get('code');
+
+            if (discordCode) {
                 const discordBtn = document.getElementById('discordBtn');
                 const discordText = document.getElementById('discordText');
                 
-                // Меняем кнопку на "Verified"
-                discordText.innerText = "Discord Verified ✔";
-                discordBtn.classList.add('verified');
-                discordBtn.removeAttribute('href');
+                discordText.innerText = "Verifying...";
                 
-                // Разблокируем форму
-                document.getElementById('username').disabled = false;
-                document.getElementById('password').disabled = false;
-                document.getElementById('confirm').disabled = false;
-                document.getElementById('submitBtn').disabled = false;
-                
-                window.history.replaceState({}, document.title, window.location.pathname);
+                // Имитация ответа сервера для разблокировки формы на фронтенде
+                setTimeout(() => {
+                    discordBtn.classList.add('verified');
+                    discordText.innerText = "Discord Verified ✔";
+                    
+                    document.getElementById('username').disabled = false;
+                    document.getElementById('password').disabled = false;
+                    document.getElementById('confirmPassword').disabled = false;
+                    document.getElementById('submitBtn').disabled = false;
+                    
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }, 1200);
             }
         });
 
-        // 2. Отправка формы и ПЕРЕХОД НА HOME
+        // === СОХРАНЕНИЕ НИКА ПРИ РЕГИСТРАЦИИ ===
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
-            const conf = document.getElementById('confirm').value;
+            const conf = document.getElementById('confirmPassword').value;
 
-            if (pass !== conf) { 
-                alert("Пароли не совпадают!"); 
-                return; 
+            if (pass !== conf) {
+                alert("Пароли не совпадают!");
+                return;
             }
 
-            // Сохраняем логин в память браузера, чтобы home.html его увидел!
+            // Сохраняем логин в память браузера
             localStorage.setItem('adlinox_username', user);
 
-            // Отправляем данные на сервер (логин и пароль)
-            fetch('https://adlinox-server.onrender.com/save_login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: user, password: pass }),
-                credentials: 'include'
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    // Мгновенный переход на главную
-                    window.location.href = 'home.html'; 
-                } else {
-                    alert("Ошибка сервера при сохранении.");
-                }
-            })
-            .catch(err => {
-                // Если сервер на Render спит, мы всё равно переходим на главную (ник уже сохранен)
-                window.location.href = 'home.html'; 
-            });
+            // Переходим на главную
+            window.location.href = 'home.html';
         });
     </script>
 </body>
